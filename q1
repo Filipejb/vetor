@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main(){
+  int nvolta = 0, pos_ma = 0; 
+  double ma = 0, med = 0;
+  double temvolta = 0,temtotal; 
+  
+  
+
+     printf("digite quantas voltas serão:");
+     scanf("%d", &nvolta);
+     
+     for(int i = 0; i <= nvolta; i++){
+     printf("Digite o tempo da %d volta:",i+1);
+     scanf("%lf", &temvolta);
+
+     if (temvolta < ma)
+       ma = temvolta;
+       pos_ma = i;
+       
+  }
+       
+       med = temvolta/nvolta;
+   printf("melhor tempo: %lf\n", ma);
+  printf("Volta com melhor tempo: %d\n", pos_ma);
+   printf("Media das voltas: %lf\n", med);
+   
+
+  
+  return 0;
+}
