@@ -1,0 +1,84 @@
+#include <stdio.h>
+
+#define mintimes 3
+#define maxtimes 9
+#define minjogador 6
+#define maxjogador 11
+#define idademin 18
+
+
+int main() {
+    int ntimes, njogado, idade, peso, i, j;
+    float medidades, medpeso;
+    int qtdmeno, qtdpesomax, pesomax;
+    float percpesomax;
+
+    printf("Quantos times vao participar do campeonato? (entre %d e %d): ", mintimes, maxtimes);
+    scanf("%d", &ntimes);
+
+    while (ntimes < mintimes || ntimes > maxtimes) {
+        printf("Quantidade invalida, digite novamente: ");
+        scanf("%d", &ntimes);
+    }
+
+    for (i = 1; i <= ntimes; i++) {
+        printf("\nTime %d:\n", i);
+
+        printf("Quantos jogadores serao inscritos? (entre %d e %d): ", minjogador, maxjogador);
+        scanf("%d", &njogado);
+
+        while (njogado <  minjogador || njogado > maxjogador) {
+            printf("Quantidade invalida, digite novamente: ");
+            scanf("%d", &njogado);
+        }
+
+        float soma_idades = 0;
+        float soma_peso = 0;
+        int qtd_peso_acima_25 = 0;
+
+        for (j = 1; j <= njogado; j++) {
+            printf("\nJogador %d:\n", j);
+
+            printf("Digite a idade: ");
+            scanf("%d", &idade);
+
+            printf("Digite o peso: ");
+            scanf("%d", &peso);
+
+            soma_idades += idade;
+
+            if (idade < idademin) {
+                qtdmeno++;
+            }
+
+            if (idade > 25) {
+                soma_peso += peso;
+                qtd_peso_acima_25++;
+
+                if (peso > pesomax) {
+                    qtdpesomax++;
+                }
+            }
+        }
+
+        medidades = soma_idades / njogado;
+
+        if (qtd_peso_acima_25 > 0) {
+            medpeso = soma_peso / qtd_peso_acima_25;
+        } else {
+            medpeso = 0;
+        }
+
+        printf("\nMédia das idades dos jogadores do time %d: %.1f\n", i, medidades);
+        printf("Média do peso dos jogadores acima de 25 anos do time %d: %.1f\n", i, medpeso);
+    }
+
+    printf("\nResumo geral:\n");
+
+    printf("Quantidade de jogadores menores de idade: %d\n", qtdmeno);
+
+    percpesomax = (float) qtdpesomax / (ntimes * njogado) * 100;
+    printf("Quantidade e porcentagem de jogadores com mais de %d QUILOS: %d (%.1f%%)\n", pesomax, qtdpesomax, percpesomax);
+
+    return 0;
+}
